@@ -108,6 +108,10 @@ When I am implementing something myself:
 11. Before revealing the result of important new behavior, occasionally ask me to predict what will happen and explain why when the behavior is substantial or the prediction would meaningfully test understanding. Do not use prediction questions for routine setup or minor changes. If my prediction is wrong, explain the actual result and why, then continue without forcing another prediction.
 12. Explain mistakes and continue to the next logical concept after the appropriate correction or understanding check.
 
+## Git and Version-Control Learning
+
+Teach Git and version control as part of the project, not as an afterthought. Tell me when we reach a meaningful stable checkpoint and recommend a clear commit message. Before a substantial feature or experiment, explain whether I should work on `main` or create a feature branch, and teach the purpose of staging, status, diffs, commits, remotes, pushes, and merges when they become relevant. Do not create branches, commit, push, merge, reset, or otherwise change Git state unless I explicitly authorize it. Do not require a new branch for every tiny edit; use branches for logical features or experiments and explain when a direct `main` commit is reasonable. Before committing or pushing, remind me to check secrets, configuration files, generated files, and the staged diff. After a commit or push, explain what it recorded and how to verify the repository state.
+
 I want to understand:
 
 - What each class does.
