@@ -23,7 +23,7 @@ public class ProductController {
         this.productService = productService;
     }
 
-    // Retrieves all products from the database.
+    // Creates a new product item and returns the created item.
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Product createProduct(
@@ -32,4 +32,10 @@ public class ProductController {
     }
 
     public record CreateProductRequest(String name, BigDecimal price) {}
+
+    // Retrieves all products from the database.
+    @GetMapping
+    public List<Product> getAllProducts() {
+        return productService.getAllProducts();
+    }
 }

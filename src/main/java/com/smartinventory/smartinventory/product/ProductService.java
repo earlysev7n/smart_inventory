@@ -25,4 +25,10 @@ public class ProductService {
         return productRepository.save(product);
     }
 
+    // Retrieves all products from the database.
+    @Transactional(readOnly = true)
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
+    }
+
 }
