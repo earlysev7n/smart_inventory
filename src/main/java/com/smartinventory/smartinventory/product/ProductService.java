@@ -31,4 +31,10 @@ public class ProductService {
         return productRepository.findAll();
     }
 
+    // Retrieves a product by its ID.
+    @Transactional(readOnly = true)
+    public Optional<Product> getProductById(Long id) {
+        return productRepository.findById(id);
+    }
+
 }
