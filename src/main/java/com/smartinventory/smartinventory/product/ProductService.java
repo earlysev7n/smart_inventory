@@ -37,4 +37,17 @@ public class ProductService {
         return productRepository.findById(id);
     }
 
+    // Updates an existing product with new values.
+    @Transactional 
+    public Optional<Product> updateProduct(
+        Long id,
+        String name,
+        BigDecimal price) {
+            return productRepository.findById(id).map(product -> {
+                product.setName(name);
+                product.setPrice(price);
+                return productRepository.save(product);
+            });
+        }
+
 }

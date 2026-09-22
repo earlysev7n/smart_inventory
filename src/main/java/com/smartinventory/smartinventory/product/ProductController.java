@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 @RestController 
 @RequestMapping ("/api/products")
@@ -47,6 +49,22 @@ public class ProductController {
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+    // Updates an existing product with new values.
+    @PutMapping("/{id}")
+    public ResponseEntity<Product> updateProduct(
+        @PathVariable Long id,
+        @RequestBody UpdateProductRequest request) {
+            return productService.updateProduct(
+                id,
+                request.name(),
+                request.price())
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+        }
+
+    public record UpdateProductRequest(String name,BigDecimal price) {}
+
 }
 
 
