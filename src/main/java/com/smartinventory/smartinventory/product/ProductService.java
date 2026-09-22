@@ -50,4 +50,15 @@ public class ProductService {
             });
         }
 
+    // Deletes a product by its ID.
+    @Transactional 
+    public boolean deleteProduct(Long id) {
+        return productRepository.findById(id)
+        .map(product -> {
+            productRepository.delete(product);
+            return true;
+        })
+        .orElse(false);
+    }
+
 }
