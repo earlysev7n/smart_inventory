@@ -52,5 +52,25 @@ public class ProductStockUsageController {
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
-    
+
+    // updates an existing product stock usage record with new values.
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductStockUsage> updateStockUsage(
+            @PathVariable Long id,
+            @RequestBody UpdateStockUsageRequest request) {
+        return stockUsageService.updateStockUsage(
+                id,
+                request.productId(),
+                request.inventoryItemId(),
+                request.requiredQuantity())
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    public record UpdateStockUsageRequest(
+            Long productId,
+            Long inventoryItemId,
+            BigDecimal requiredQuantity) {
+    }
+
 }

@@ -63,4 +63,33 @@ public class ProductStockUsageService {
     public Optional<ProductStockUsage> getStockUsageById(Long id) {
         return stockUsageRepository.findById(id);
     }
+
+    // Updates an existing product stock usage record with new values.
+    public Optional<ProductStockUsage> updateStockUsage(
+            Long id,
+            Long productId,
+            Long inventoryItemId,
+            BigDecimal requiredQuantity) {
+
+        if (requiredQuantity == null || requiredQuantity.signum() <= 0) {
+            throw new IllegalArgumentException(
+                    "Required quantity must be greater than zero");
+        }
+
+        return stockUsageRepository.findById(id).map(stockUsage -> {
+            Product product = productRepository.findById(productId)
+                    .orElseThrow(() -> new IllegalArgumentException(
+                            "Product not found: " + productId));
+
+            InventoryItem inventoryItem = inventoryItemRepository.findById(inventoryItemId)
+                    .orElseThrow(() -> new IllegalArgumentException(
+                            "Inventory item not found: " + inventoryItemId));
+
+            stockUsage.setProduct(product);
+            stockUsage.setInventoryItem(inventoryItem);
+            stockUsage.setRequiredQuantity(requiredQuantity);
+
+            return stockUsageRepository.save(stockUsage);
+        });
+    }
 }
