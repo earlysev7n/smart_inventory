@@ -73,4 +73,14 @@ public class ProductStockUsageController {
             BigDecimal requiredQuantity) {
     }
 
+    // Deletes a product stock usage record by its ID.
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteStockUsage(@PathVariable Long id) {
+        if (stockUsageService.deleteStockUsage(id)) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }

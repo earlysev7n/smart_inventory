@@ -10,6 +10,7 @@ import com.smartinventory.smartinventory.product.ProductRepository;
 import java.math.BigDecimal;
 import org.springframework.stereotype.Service;
 
+
 @Service
 // Contains business logic for managing product stock usage operations.
 public class ProductStockUsageService {
@@ -91,5 +92,15 @@ public class ProductStockUsageService {
 
             return stockUsageRepository.save(stockUsage);
         });
+    }
+
+    // Deletes a product stock usage record by its ID.
+    public boolean deleteStockUsage(Long id) {
+        return stockUsageRepository.findById(id)
+                .map(stockUsage -> {
+                    stockUsageRepository.delete(stockUsage);
+                    return true;
+                })
+                .orElse(false);
     }
 }
