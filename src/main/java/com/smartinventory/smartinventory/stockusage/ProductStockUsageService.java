@@ -1,5 +1,7 @@
 package com.smartinventory.smartinventory.stockusage;
 
+import java.util.List;
+
 import com.smartinventory.smartinventory.inventory.InventoryItem;
 import com.smartinventory.smartinventory.inventory.InventoryItemRepository;
 import com.smartinventory.smartinventory.product.Product;
@@ -8,6 +10,7 @@ import java.math.BigDecimal;
 import org.springframework.stereotype.Service;
 
 @Service
+// Contains business logic for managing product stock usage operations.
 public class ProductStockUsageService {
 
     private final ProductStockUsageRepository stockUsageRepository;
@@ -23,6 +26,7 @@ public class ProductStockUsageService {
         this.inventoryItemRepository = inventoryItemRepository;
     }
 
+    // Creates a new product stock usage record and saves it to the database.
     public ProductStockUsage createStockUsage(
             Long productId,
             Long inventoryItemId,
@@ -47,5 +51,10 @@ public class ProductStockUsageService {
                 requiredQuantity);
 
         return stockUsageRepository.save(stockUsage);
+    }
+
+    // Retrieves all product stock usage records from the database.
+    public List<ProductStockUsage> getAllStockUsages() {
+        return stockUsageRepository.findAll();
     }
 }
