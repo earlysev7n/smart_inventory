@@ -1,6 +1,7 @@
 package com.smartinventory.smartinventory.stockusage;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.smartinventory.smartinventory.inventory.InventoryItem;
 import com.smartinventory.smartinventory.inventory.InventoryItemRepository;
@@ -56,5 +57,10 @@ public class ProductStockUsageService {
     // Retrieves all product stock usage records from the database.
     public List<ProductStockUsage> getAllStockUsages() {
         return stockUsageRepository.findAll();
+    }
+
+    // Retrieves a product stock usage record by its ID.
+    public Optional<ProductStockUsage> getStockUsageById(Long id) {
+        return stockUsageRepository.findById(id);
     }
 }
